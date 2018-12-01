@@ -51,7 +51,7 @@ Login to container C1 and install lighttpd with php
 apk add lighttpd php5 php5-cgi php5-curl php5-fpm
 ```
 
-Edit config file to allow for cgi class in php.
+Edit config file to allow for cgi call in php.
 Add index.php to /var/www/localhost/htdocs/index.php
 Start lighttpd
 ```

@@ -77,7 +77,7 @@ lxc-ls will display the ip's of the containers and curl can be used to fetch the
 
 We can now redirect a request to the pi to the container by using the bridge we created.
 ```
-sudo iptables -t nat -A PREROUTING -i wlan0 -p tcp --dport 80 -j DNAT --to-destination 10.0.3.10:80
+sudo iptables -t nat -A PREROUTING -i usb0 -p tcp --dport 80 -j DNAT --to-destination 10.0.3.10:80
 ```
 
 We can now connect to the device using a browser http://raspberrypi.local

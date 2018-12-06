@@ -1,7 +1,7 @@
 # LEO1-2018-Portfolio-Two
 Group 23 - G23
 
-##Implementation
+## Implementation
 The first step was to install the container software
 ```
 sudo apt-get install lxc
@@ -81,3 +81,11 @@ sudo iptables -t nat -A PREROUTING -i usb0 -p tcp --dport 80 -j DNAT --to-destin
 ```
 
 We can now connect to the device using a browser http://raspberrypi.local
+
+List of commands for debugging
+```
+lxc-ls -f
+lxc-attach -n <name of container>
+iptables -L -n -t nat
+curl <ipv4 of a container/raspberrypi>
+```

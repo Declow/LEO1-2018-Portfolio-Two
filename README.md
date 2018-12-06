@@ -8,19 +8,19 @@ sudo apt-get install lxc
 sudo apt-get install dnsmasq-base
 ```
 
-Second step was to add a new user to create the new unprivileged container
+Second step we added a new user to create the new unprivileged container
 ```
 sudo useradd con
 ```
 
-Edit user con subuid to 100000:65536 and subgid to 100000:65536
+Then we edited the users permissions subuid to 100000:65536 and subgid to 100000:65536
 This was done using nano
 ```
 sudo nano /etc/subuid
 sudo nano /etc/subgid
 ```
 
-Next create a default config for lxc for the con user in /home/con/.config/lxc/default.conf
+Next we created a default config for lxc and for the con user in /home/con/.config/lxc/default.conf
 ```
 lxc.id_map = u 0 100000 65536
 lxc.id_map = g 0 100000 65536
@@ -29,14 +29,13 @@ LXC_DHCP_CONFILE=/etc/lxc/dhcp.conf
 lxc.network.link = lxcbr0
 ```
 
-login as con user and add the two new container
+We then logged in as the con user and added the two new containers
 ```
 lxc-create -n C1 -t download -- -d alpine -r 3.4 -a armhf
 lxc-create -n C2 -t download -- -d alpine -r 3.4 -a armhf
 ```
 
-Use lxc-attach to login to container C2 and add the script rng.sh to /bin/.
-Install socat to serve the script to port 8080
+We used lxc-attach to login to container C2 and add the script rng.sh to /bin/. We then installed socat to serve the script to port 8080
 ```
 apt add socat
 ```
@@ -46,14 +45,13 @@ start script by the following command
 socat -v -v tcp-listen:8080,fork,reuseaddr exec:/bin/rng.sh
 ```
 
-Login to container C1 and install lighttpd with php
+We then logged into container C1 and install lighttpd with php
 ```
 apk add lighttpd php5 php5-cgi php5-curl php5-fpm
 ```
 
-Edit config file to allow for cgi call in php.
-Add index.php to /var/www/localhost/htdocs/index.php
-Start lighttpd
+We then edited the config file to allow for cgi call in php.
+Add index.php to /var/www/localhost/htdocs/index.php and started lighttpd
 ```
 /etc/init.d/lighttpd start
 ```
